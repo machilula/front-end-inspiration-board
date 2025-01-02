@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
+import { BoardsList } from './components/BoardsList'
+import { NewBoardForm } from './components/NewBoardForm'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const BOARDS = [
+  {
+    title: 'Test A',
+    creator: 'Lula',
+    cards: [
+      {
+        text: 'AAA'
+      },
+      {
+        text: 'BBB'
+      },
+      {
+        text: 'CCC'
+      }
+    ]
+  },
+  {
+    title: 'Test B',
+    creator: 'Lula',
+    cards: [
+      {
+        text: '111'
+      },
+      {
+        text: '222'
+      }
+    ]
+  },
+  {
+    title: 'Test C',
+    creator: 'Lula',
+    cards: []
+  }
+];
 
+function App() {
+  const [boardData, setBoardData] = useState(BOARDS);
+
+  const addBoard = (newBoard) => {
+    newBoard['cards'] = [];
+
+    setBoardData(prevBoard => [...prevBoard, newBoard]);
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <h1>Inspiration Board</h1>
+      </header>
+      <main>
+        <section className='boards-container'>
+          <BoardsList boards={boardData} />
+          <NewBoardForm onNewBoard={addBoard}/>
+        </section>
+      </main>
     </>
-  )
+  );
 }
 
 export default App
