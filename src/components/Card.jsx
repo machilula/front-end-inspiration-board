@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const Card = (props) => {
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(props.likes);
 
   const onLikeClick = () => {
     setLikeCount(likeCount + 1);
