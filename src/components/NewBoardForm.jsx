@@ -8,10 +8,7 @@ const initialValue = {
 export const NewBoardForm = (props) => {
   const [board, setBoard] = useState(initialValue);
   const [showBoard, setShowBoard] = useState(true);
-  
-  
-  console.log(board); 
-  
+
 
   const handleBoardChange = (event) => {
     setBoard(prevBoard => {
