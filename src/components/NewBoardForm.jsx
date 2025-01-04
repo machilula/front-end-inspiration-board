@@ -30,6 +30,7 @@ export const NewBoardForm = (props) => {
   if (showBoard) {
     return (
       <div>
+        <h2>Create New Board</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='title'>Title</label>
@@ -49,6 +50,9 @@ export const NewBoardForm = (props) => {
           </div>
           <input type="submit" value='Create'/>
         </form>
+        <div>
+          <p> Preview: {board.title} - {board.creator}</p>
+        </div>
         <button onClick={() => setShowBoard(false)}>Hide New Board</button>
       </div>
     )
