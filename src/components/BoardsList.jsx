@@ -9,6 +9,7 @@ export const BoardsList = ({ boards, onSelectBoard }) => {
     <div>
       <h2>Boards</h2>
       <select onChange={(e) => onSelectBoard(e.target.value)}>
+      <option selected value="">Please select a board</option>
       {boardTitles}
       </select>
     </div>
