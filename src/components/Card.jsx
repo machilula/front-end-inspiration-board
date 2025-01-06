@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 export const Card = (props) => {
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(props.likes);
 
   const onLikeClick = () => {
-    setLikeCount(likeCount + 1);
+    setLikeCount(likeCount => likeCount + 1);
   };
-
 
   return (
     <li>
       <h3>{props.message}</h3>
-      <h3>{props.likes}</h3>
+      <h3>{likeCount}</h3>
       <button onClick={onLikeClick}>💜</button>
+      <button onClick={props.onDeleteCard}>Delete</button>
     </li>
   )
 };

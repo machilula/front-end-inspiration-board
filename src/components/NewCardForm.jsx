@@ -7,11 +7,23 @@ const initialValue = {
 
 export const NewCardForm = (props) => {
   const [card, setCard] = useState(initialValue);
+  const [showCardForm, setShowCardForm] = useState(false);
+
+  // const previewText = (labelInput) => {
+  //   let preview = labelInput;
+  //   return preview
+  // }
 
   const handleCardChange = (event) => {
     setCard(prevCard => {
+
       return {...prevCard, [event.target.id]: event.target.value}
     });
+  };
+
+  const handleShowCardForm = () => {
+    setShowCardForm(true);
+    setCard(initialValue);
   };
 
   const handleSubmit = (event) => {
@@ -19,25 +31,32 @@ export const NewCardForm = (props) => {
     props.onNewCard(card);
     setCard(initialValue)
   };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='message'>Message</label>
-          <input
-            type='text'
-            id='message'
-            value={card.message}
-            onChange={handleCardChange}/>
-        </div>
-        <div>
-          <p>preview: {handleCardChange}</p>
-        </div>
-        <input type="submit" value='Create'/>
-      </form>
-    </div>
-  )
+  
+  if (showCardForm) {
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='message'>Message</label>
+            <input
+              type='text'
+              id='message'
+              value={card.message}
+              onChange={handleCardChange}/>
+          </div>
+          <div>
+            <p>preview: {handleCardChange}</p>
+          </div>
+          <input type="submit" value='Create'/>
+        </form>
+        <button onClick={() => setShowCardForm(false)}>Create New Card</button>
+      </div>
+    )
+  } else {
+    return (
+      <button onClick={handleShowCardForm}>New Card</button>
+    )
+  }
 };
 
 
