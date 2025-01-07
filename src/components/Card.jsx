@@ -12,6 +12,7 @@ export const Card = (props) => {
       <h3>{props.message}</h3>
       <h3>{likeCount}</h3>
       <button onClick={onLikeClick}>💜</button>
+      <button onClick={props.onDeleteCard}>Delete</button>
     </li>
   )
 };

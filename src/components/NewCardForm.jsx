@@ -9,18 +9,22 @@ export const NewCardForm = (props) => {
   const [card, setCard] = useState(initialValue);
   const [showCardForm, setShowCardForm] = useState(false);
 
-
+  // const previewText = (labelInput) => {
+  //   let preview = labelInput;
+  //   return preview
+  // }
 
   const handleCardChange = (event) => {
     setCard(prevCard => {
+
       return {...prevCard, [event.target.id]: event.target.value}
     });
   };
 
   const handleShowCardForm = () => {
-    setShowCardForm(false);
+    setShowCardForm(true);
     setCard(initialValue);
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,12 +49,12 @@ export const NewCardForm = (props) => {
           </div>
           <input type="submit" value='Create'/>
         </form>
-        <button onClick={() => setShowBoard(true)}>Create New Card</button>
+        <button onClick={() => setShowCardForm(false)}>Create New Card</button>
       </div>
     )
   } else {
     return (
-      <button onClick={handleShowCardForm}></button>
+      <button onClick={handleShowCardForm}>New Card</button>
     )
   }
 };

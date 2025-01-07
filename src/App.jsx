@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
@@ -80,6 +81,43 @@ function App() {
 
   const currentBoardTitle =  `${selectedBoard.title} by ${selectedBoard.creator}`; 
 
+  //  addCard does not render a new card. WIP
+  const addCard = (boardId, newCard) => {
+    // call setselectedboard to copy board object
+    // pass in newcards to new board object
+    // call setboarddata to update the board object
+
+    // let newCards = [];
+    setSelectedBoard((prevBoard) => {
+      return {...prevBoard, cards: prevBoard.cards.push(newCard)};
+    });
+
+    // setBoardData((prevBoard) => {
+    //   console.log([...prevBoard, selectedBoard])
+    //   return [...prevBoard, selectedBoard];
+    // })
+
+
+    setBoardData(boardData => boardData.map(board => {
+      if (board.id === boardId) {
+        // newCards = [...board.cards];
+        // newCards.push(newCard);
+        board['cards'] = [board.cards, newCard]
+      }
+    }));
+  };
+//  deleteCard event handler WIP, does not work
+  const deleteCard = (boardId, cardId) => {
+    setBoardData(boardData => boardData.map(board => {
+      if (board.id === boardId) {
+        board.cards.filter(card => {
+          return card.id !== cardId;
+        })
+      } else {
+        return;
+      }
+    }));
+  };
 
   return (
     <>
@@ -96,7 +134,7 @@ function App() {
           <NewBoardForm onNewBoard={addBoard}/>
         </section>
         <section>
-          {isBoardSelected ? <Board board={selectedBoard} onNewCard={() => console.log('You added a new card!')} /> : ''}
+          {isBoardSelected ? <Board board={selectedBoard} onNewCard={addCard} onDeleteCard={deleteCard}/> : ''}
         </section>
       </main>
     </>
