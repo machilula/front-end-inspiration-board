@@ -49,7 +49,7 @@ export const NewCardForm = (props) => {
           </div>
           <input type="submit" value='Create'/>
         </form>
-        <button onClick={() => setShowCardForm(false)}>Create New Card</button>
+        <button onClick={() => setShowCardForm(false)}>Hide New Card</button>
       </div>
     )
   } else {
