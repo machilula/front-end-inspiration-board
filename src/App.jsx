@@ -54,6 +54,17 @@ import './App.css';
 //   }
 // ];
 
+const convertBoardFromApi = (apiBoard) => {
+  const newBoard = {
+    id: apiBoard.id,
+    creator: apiBoard.owner,
+    title: apiBoard.title,
+    cards: apiBoard.cards ? apiBoard.cards : []
+  };
+
+  return newBoard;
+};
+
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({});
@@ -61,7 +72,11 @@ function App() {
 
   useEffect(() => {
     getAllBoards()
-    .then( response => setBoardData(response.data))
+    .then( response => response.data.map(convertBoardFromApi))
+    .then( response => {
+      console.log(response.data);
+      setBoardData(response.data);
+    })
     .catch(error => console.log(`couldn't update board data: ${error}`))
   }, []);
     // make a GET call to API to retrieve all boards
