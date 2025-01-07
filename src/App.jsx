@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
-import { getAllBoards } from './httpRequests/boardRequests';
+import { getAllBoards, addNewBoard, getBoardById } from './httpRequests/boardRequests';
 import './App.css';
 
 // const BOARDS = [
@@ -72,19 +72,22 @@ function App() {
 
   useEffect(() => {
     getAllBoards()
-    .then( response => response.data.map(convertBoardFromApi))
-    .then( response => {
-      console.log(response.data);
-      setBoardData(response.data);
+    .then( apiBoards => {
+      const boards = apiBoards.map(convertBoardFromApi);
+      setBoardData(boards);
     })
     .catch(error => console.log(`couldn't update board data: ${error}`))
   }, []);
-    // make a GET call to API to retrieve all boards
+
 
   const addBoard = (newBoard) => {
-    newBoard['cards'] = [];
-    setBoardData(prevBoard => [...prevBoard, newBoard]);
+    const apiBoard = {"title": newBoard.title, "owner": newBoard.creator};
+
+    addNewBoard(apiBoard)
+      .then(response => console.log(response))
+      .catch(error => console.log(`Couldn't add board: ${error}`));
   };
+  
 
   const selectBoard = (boardId) => {
     if (!boardId) {
@@ -93,14 +96,14 @@ function App() {
       return;
     }
 
-    for (const board of boardData) {
-      if (board.id == boardId) {
-        setSelectedBoard(board);
+    getBoardById(boardId)
+      .then((apiBoard) => {
+        const boardObj = convertBoardFromApi(apiBoard);
+        setSelectedBoard(boardObj);
         setIsBoardSelected(true);
-        return;
-      }
-    }
-  }
+      })
+      .catch(error => console.log(`Could not select board: ${error}`));
+  };
 
   const currentBoardTitle =  `${selectedBoard.title} by ${selectedBoard.creator}`; 
 
@@ -161,12 +164,12 @@ function App() {
             <h2> Selected Board </h2>
             <p> { isBoardSelected ? currentBoardTitle : 'None'}</p>
           </div>
-          <NewBoardForm onNewBoard={addBoard}/>
+          <NewBoardForm onAddBoard={addBoard}/>
         </section>
         <section>
           {/* when Board passes down the funcs, how does it update boardData? */}
           {isBoardSelected ? <Board board={selectedBoard} onNewCard={addCard} onDeleteCard={deleteCard}/> : ''}
-        </section>
+        </section> 
       </main>
     </>
   );

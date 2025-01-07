@@ -30,10 +30,8 @@ export const getAllBoards = () => {
 // when user selects a board, get board by id
 export const getBoardById = (board_id) => {
    const response = axios.get(`${kbaseURL}/boards/${board_id}`)
-      .then(response => response.data)
+      .then(response => response.data.board)
       .catch(error => console.log(`Couldn't fetch board with ID ${board_id}: ${error}`));
-
-
    return response
 };
 

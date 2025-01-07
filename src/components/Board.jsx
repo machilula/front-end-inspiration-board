@@ -2,7 +2,6 @@ import { CardList } from "./CardList";
 import { NewCardForm } from "./NewCardForm";
 
 export const Board = ({ board, onNewCard, onDeleteCard }) => {
-  console.log(board);
   
   return (
     <div>

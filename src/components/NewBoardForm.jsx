@@ -23,7 +23,7 @@ export const NewBoardForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onNewBoard(board);
+    props.onAddBoard(board);
     setBoard(initialValue);
   };
 
