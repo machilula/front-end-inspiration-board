@@ -3,63 +3,68 @@ import { useEffect } from 'react';
 import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
+import { getAllBoards } from './httpRequests/boardRequests';
 import './App.css';
 
-const BOARDS = [
-  {
-    id: 1,
-    title: 'Test A',
-    creator: 'Lula',
-    cards: [
-      {
-        id: 1,
-        message: 'AAA',
-        likes: 5
-      },
-      {
-        id: 2,
-        message: 'BBB',
-        likes: 2
-      },
-      {
-        id: 3,
-        message: 'CCC', 
-        likes: 6
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Test B',
-    creator: 'Lula',
-    cards: [
-      {
-        id: 1,
-        message: '111',
-        likes: 4
-      },
-      {
-        id: 2,
-        message: '222',
-        likes: 0
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Test C',
-    creator: 'Lula',
-    cards: []
-  }
-];
+// const BOARDS = [
+//   {
+//     id: 1,
+//     title: 'Test A',
+//     creator: 'Lula',
+//     cards: [
+//       {
+//         id: 1,
+//         message: 'AAA',
+//         likes: 5
+//       },
+//       {
+//         id: 2,
+//         message: 'BBB',
+//         likes: 2
+//       },
+//       {
+//         id: 3,
+//         message: 'CCC', 
+//         likes: 6
+//       }
+//     ]
+//   },
+//   {
+//     id: 2,
+//     title: 'Test B',
+//     creator: 'Lula',
+//     cards: [
+//       {
+//         id: 1,
+//         message: '111',
+//         likes: 4
+//       },
+//       {
+//         id: 2,
+//         message: '222',
+//         likes: 0
+//       }
+//     ]
+//   },
+//   {
+//     id: 3,
+//     title: 'Test C',
+//     creator: 'Lula',
+//     cards: []
+//   }
+// ];
 
 function App() {
-  const [boardData, setBoardData] = useState(BOARDS);
+  const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({});
   const [isBoardSelected, setIsBoardSelected] = useState(false);
 
-  // use useEffect()
-    // make a GET call to API to retrieve the 
+  useEffect(() => {
+    getAllBoards()
+    .then( response => setBoardData(response.data))
+    .catch(error => console.log(`couldn't update board data: ${error}`))
+  }, []);
+    // make a GET call to API to retrieve all boards
 
   const addBoard = (newBoard) => {
     newBoard['cards'] = [];
