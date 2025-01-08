@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './NewBoardForm.css';
 
 const initialValue = {
   title: '',
@@ -7,7 +8,7 @@ const initialValue = {
 
 export const NewBoardForm = (props) => {
   const [board, setBoard] = useState(initialValue);
-  const [showBoard, setShowBoard] = useState(true);
+  const [showBoard, setShowBoard] = useState(false);
 
 
   const handleBoardChange = (event) => {
@@ -29,36 +30,32 @@ export const NewBoardForm = (props) => {
 
   if (showBoard) {
     return (
-      <div>
-        <h2>Create New Board</h2>
+      <div className='NewBoardForm'>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='title'>Title</label>
+          <div className='input-col'>
+            <label htmlFor='title'>title:</label>
             <input 
               type='text' 
               id='title' 
               value={board.title} 
               onChange={handleBoardChange}/>
           </div>
-          <div>
-            <label htmlFor='creator'>Creator</label>
+          <div className='input-col'>
+            <label htmlFor='creator'>creator:</label>
             <input 
               type='text' 
               id='creator' 
               value={board.creator} 
               onChange={handleBoardChange}/>
           </div>
-          <input type="submit" value='Create'/>
+          <input className='create-btn' type="submit" value='CREATE BOARD'/>
         </form>
-        <div>
-          <p> Preview: {board.title} - {board.creator}</p>
-        </div>
-        <button onClick={() => setShowBoard(false)}>Hide New Board</button>
+        <button className='board-btn hide-btn' onClick={() => setShowBoard(false)}>HIDE BOARD</button>
       </div>
     )
   } else {
     return (
-      <button onClick={handleShowForm}>Show New Board</button>
+      <button className='board-btn' onClick={handleShowForm}>ADD BOARD</button>
     );
   }
 
