@@ -38,7 +38,8 @@ export const NewBoardForm = (props) => {
               type='text' 
               id='title' 
               value={board.title} 
-              onChange={handleBoardChange}/>
+              onChange={handleBoardChange}
+              required/>
           </div>
           <div className='input-col'>
             <label htmlFor='creator'>creator:</label>
@@ -46,7 +47,8 @@ export const NewBoardForm = (props) => {
               type='text' 
               id='creator' 
               value={board.creator} 
-              onChange={handleBoardChange}/>
+              onChange={handleBoardChange}
+              required/>
           </div>
           <input className='create-btn' type="submit" value='CREATE BOARD'/>
         </form>
