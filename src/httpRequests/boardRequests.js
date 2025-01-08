@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const kbaseURL = "http://localhost:5000";
+const kbaseURL = "http://127.0.0.1:5000";
 
 
 // when user submits a new board form, new board should be created

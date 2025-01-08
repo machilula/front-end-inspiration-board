@@ -1,22 +1,15 @@
 import { useState } from "react";
 
 const initialValue = {
-    message: '',
-    preview: ''
+    message: ''
   };
 
 export const NewCardForm = (props) => {
   const [card, setCard] = useState(initialValue);
   const [showCardForm, setShowCardForm] = useState(false);
 
-  // const previewText = (labelInput) => {
-  //   let preview = labelInput;
-  //   return preview
-  // }
-
   const handleCardChange = (event) => {
     setCard(prevCard => {
-
       return {...prevCard, [event.target.id]: event.target.value}
     });
   };
@@ -28,6 +21,7 @@ export const NewCardForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(card)
     props.onNewCard(card);
     setCard(initialValue)
   };
@@ -45,7 +39,7 @@ export const NewCardForm = (props) => {
               onChange={handleCardChange}/>
           </div>
           <div>
-            <p>preview: {handleCardChange}</p>
+            <p>preview: {card.message}</p>
           </div>
           <input type="submit" value='Create'/>
         </form>

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
-import { getAllBoards, addNewBoard, getBoardById } from './httpRequests/boardRequests';
+import { getAllBoards, addNewBoard, getBoardById, addNewCard} from './httpRequests/boardRequests';
 import './App.css';
 
 // const BOARDS = [
@@ -65,6 +65,15 @@ const convertBoardFromApi = (apiBoard) => {
   return newBoard;
 };
 
+const convertCardFromApi = (apiCard) => {
+  const newCard = {
+    id: apiCard.id,
+    message: apiCard.message,
+    likes: 0
+  };
+  return newCard
+};
+
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({});
@@ -81,10 +90,15 @@ function App() {
 
 
   const addBoard = (newBoard) => {
+    console.log(newBoard)
     const apiBoard = {"title": newBoard.title, "owner": newBoard.creator};
 
     addNewBoard(apiBoard)
-      .then(response => console.log(response))
+      // .then(response => console.log(response.board))
+      .then(response => {
+        console.log(response.board)
+        setBoardData(prevBoards => [convertBoardFromApi(response.board), ...prevBoards])
+      })
       .catch(error => console.log(`Couldn't add board: ${error}`));
   };
   
@@ -108,33 +122,22 @@ function App() {
   const currentBoardTitle =  `${selectedBoard.title} by ${selectedBoard.creator}`; 
 
   //  addCard does not render a new card. WIP
-  const addCard = (boardId, newCard) => {
-    // make a post request to add new card
+  const addCard = (newCard) => {
+    // console.log(newCard)
+    console.log(selectedBoard)
+    const apiCard = {"message": newCard.message, "like_count": 0}
 
-    // call setselectedboard to copy board object
-    // pass in newcards to new board object
-    // call setboarddata to update the board object
-
-    // let newCards = [];
-    // setSelectedBoard((prevBoard) => {
-    //   return {...prevBoard, cards: prevBoard.cards.push(newCard)};
-    // });
-
-    // setBoardData((prevBoard) => {
-    //   console.log([...prevBoard, selectedBoard])
-    //   return [...prevBoard, selectedBoard];
-    // })
-    setBoardData((boardData) => boardData.map(board => {
-      if (board.id === boardId) {
-        return {...board, cards: [...board.cards, newCard]};
-      } else return board;
-      // newCards = [...board.cards];
-      // newCards.push(newCard);
-      // board['cards'] = [board.cards, newCard]
-      
-    }));
-    
-    selectBoard(boardId);
+    addNewCard(selectedBoard.id, apiCard)
+    .then(response => {
+      console.log(response)
+      setBoardData((boardData) => boardData.map(board => {
+        if (board.id === selectedBoard.id) {
+          return {...board, cards: [...board.cards, convertCardFromApi(response.card)]};
+        } else return board;
+      }));
+    })
+    .catch(error => console.log(`Could not add card: ${error}`));
+    selectBoard(selectedBoard.id);
   };
   
 
