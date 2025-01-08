@@ -1,16 +1,11 @@
 import { CardList } from "./CardList";
-import { NewCardForm } from "./NewCardForm";
 
-export const Board = ({ board, onNewCard, onDeleteCard }) => {
+export const Board = ({ board, onDeleteCard }) => {
   
   return (
     <div>
-      <section>
-        <h2>Cards for {board.title}</h2>
+      <section className="Board">
         <CardList cards={board.cards} onDeleteCard={onDeleteCard}/>
-      </section>
-      <section>
-        <NewCardForm onNewCard={onNewCard}/>
       </section>
     </div>
 

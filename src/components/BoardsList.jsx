@@ -1,3 +1,4 @@
+import './BoardsList.css';
 
 export const BoardsList = ({ boards, onSelectBoard }) => {
   const boardTitles = boards.map((board) => {
@@ -5,12 +6,14 @@ export const BoardsList = ({ boards, onSelectBoard }) => {
   });
 
   return (
-    <div>
-      <h2>Boards</h2>
+    <div className='BoardsList'>
+      <h2>SELECT BOARD</h2>
       <select onChange={(e) => onSelectBoard(e.target.value)}>
       <option value="">Please select a board</option>
       {boardTitles}
       </select>
+      {/* <div className='select-underlay'></div> */}
+      
     </div>
   );
 };

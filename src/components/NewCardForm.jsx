@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './NewCardForm.css';
 
 const initialValue = {
     message: '',
@@ -49,12 +50,12 @@ export const NewCardForm = (props) => {
           </div>
           <input type="submit" value='Create'/>
         </form>
-        <button onClick={() => setShowCardForm(false)}>Hide New Card</button>
+        <button className="card-btn" onClick={() => setShowCardForm(false)}>Hide New Card</button>
       </div>
     )
   } else {
     return (
-      <button onClick={handleShowCardForm}>New Card</button>
+      <button className="card-btn" onClick={handleShowCardForm}>NEW CARD</button>
     )
   }
 };

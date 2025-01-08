@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
+import { NewCardForm } from "./components/NewCardForm";
 import { getAllBoards, addNewBoard, getBoardById } from './httpRequests/boardRequests';
 import './App.css';
 
@@ -105,6 +106,7 @@ function App() {
       .catch(error => console.log(`Could not select board: ${error}`));
   };
 
+  const headerTitle = isBoardSelected ? `INSPIRATION FOR ${selectedBoard.title}`: 'CHOOSE OR CREATE BOARD!';
   const currentBoardTitle =  `${selectedBoard.title} by ${selectedBoard.creator}`; 
 
   //  addCard does not render a new card. WIP
@@ -152,26 +154,24 @@ function App() {
   };
 
   return (
-    <>
+    <div className='App'>
       <header>
-        <h1>Inspiration Board</h1>
+        <h1>{headerTitle.toUpperCase()}</h1>
+        <h2>{isBoardSelected && `Created by ${selectedBoard.creator}`}</h2>
       </header>
       <main>
-        <section className='boards-container'>
+        <section className='left-panel'>
           {/* do the functions being passed down to board  */}
           <BoardsList boards={boardData} onSelectBoard={selectBoard} />
-          <div>
-            <h2> Selected Board </h2>
-            <p> { isBoardSelected ? currentBoardTitle : 'None'}</p>
-          </div>
           <NewBoardForm onAddBoard={addBoard}/>
+          {isBoardSelected && <NewCardForm  onNewCard={addCard}/> }
         </section>
-        <section>
+        <section className='cards-container'>
           {/* when Board passes down the funcs, how does it update boardData? */}
-          {isBoardSelected ? <Board board={selectedBoard} onNewCard={addCard} onDeleteCard={deleteCard}/> : ''}
+          {isBoardSelected ? <Board board={selectedBoard} onDeleteCard={deleteCard}/> : ''}
         </section> 
       </main>
-    </>
+    </div>
   );
 }
 
