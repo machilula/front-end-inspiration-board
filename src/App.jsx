@@ -172,13 +172,11 @@ function App() {
       </header>
       <main>
         <section className='left-panel'>
-          {/* do the functions being passed down to board  */}
           <BoardsList boards={boardData} onSelectBoard={selectBoard} />
           <NewBoardForm onAddBoard={addBoard}/>
           {isBoardSelected && <NewCardForm  onNewCard={addCard}/> }
         </section>
         <section className='cards-container'>
-          {/* when Board passes down the funcs, how does it update boardData? */}
           {isBoardSelected ? <Board board={selectedBoard} onDeleteCard={deleteCard}/> : ''}
         </section> 
       </main>
