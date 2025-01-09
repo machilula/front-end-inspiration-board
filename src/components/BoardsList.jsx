@@ -9,11 +9,9 @@ export const BoardsList = ({ boards, onSelectBoard }) => {
     <div className='BoardsList'>
       <h2>SELECT BOARD</h2>
       <select onChange={(e) => onSelectBoard(e.target.value)}>
-      <option value="">Please select a board</option>
+      <option value="">CHOOSE BOARD HERE</option>
       {boardTitles}
       </select>
-      {/* <div className='select-underlay'></div> */}
-      
     </div>
   );
 };

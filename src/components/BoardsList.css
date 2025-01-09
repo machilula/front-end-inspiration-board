@@ -1,3 +1,12 @@
+.BoardsList {
+    border: 1px solid black;
+}
+
+.BoardsList h2 {
+    font-size: 1em;
+    margin-left: 1em;
+}
+
 select,
 .select-underlay{
     padding: .5em 1em;
@@ -7,26 +16,12 @@ select,
 
     border: 1px solid black;
     border-radius: 50px;
-
-    position: relative;
-    z-index: 1;
 }
 
 select {
-    text-align: center;
+    font-size: 1em;
     font-family: 'Rubik Bubbles', serif;
-    width: 100%;
 
     outline: none;
     appearance: none;
 }
-
-/* .select-underlay {
-    background-color: white;
-
-    position: absolute;
-    top: 20%;
-    right: -20%;
-    z-index: 0;
-
-} */
