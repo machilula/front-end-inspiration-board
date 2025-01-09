@@ -1,17 +1,19 @@
 .card-container button {
     border: 0px;
-    font-size: 24px;
+    font-size: 15px;
     background-color: lightblue;
     color: #004aad;
     padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px lightblue; 
-    transition: all 0.3s ease-in-out;
+    /* border-radius: 5px; */
+    border-radius: 12px;
+    /* box-shadow: 0 0 10px lightblue;  */
+    /* transition: all 0.3s ease-in-out; */
 }
 
-.card-container button:hover {
+
+/* .card-container button:hover {
     box-shadow: 0 0 20px lightblue;
-}
+} */
 
 
 
