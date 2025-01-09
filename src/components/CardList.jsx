@@ -16,6 +16,7 @@ CardList.propTypes = {
     id: propTypes.number.isRequired,
     message: propTypes.string.isRequired,
     likes: propTypes.number.isRequired,
-    onDeleteCard: propTypes.func.isRequired
   })).isRequired,
+  onDeleteCard: propTypes.func.isRequired,
+  onLikeCard: propTypes.func.isRequired
 };
