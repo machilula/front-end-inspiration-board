@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import propTypes from 'prop-types';
 import './NewBoardForm.css';
 
 const initialValue = {
@@ -60,6 +61,8 @@ export const NewBoardForm = (props) => {
       <button className='board-btn' onClick={handleShowForm}>ADD BOARD</button>
     );
   }
+};
 
-  
+NewBoardForm.propTypes = {
+  onAddBoard: propTypes.func.isRequired
 };

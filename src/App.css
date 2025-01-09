@@ -19,6 +19,8 @@ header {
 }
 
 header h2 {
+  color: #c161e8;
+
   position: relative;
   top: 15%;
   right: -15%;

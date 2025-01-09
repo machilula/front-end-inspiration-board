@@ -1,4 +1,5 @@
 import { useState } from "react";
+import propTypes from 'prop-types';
 
 export const Card = (props) => {
   const [likeCount, setLikeCount] = useState(props.likes);
@@ -15,4 +16,10 @@ export const Card = (props) => {
       <button onClick={props.onDeleteCard}>Delete</button>
     </li>
   )
+};
+
+Card.propTypes = {
+  message: propTypes.string.isRequired,
+  likes: propTypes.number.isRequired,
+  onDeleteCard: propTypes.func.isRequired
 };

@@ -1,3 +1,4 @@
-.card-btn {
+.NewCardForm .create-btn,
+.NewCardForm .card-btn {
     background: linear-gradient(180deg, #cdffd8, #94b9ff);
 }
