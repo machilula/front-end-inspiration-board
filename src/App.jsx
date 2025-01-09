@@ -87,7 +87,7 @@ function App() {
       setBoardData(boards);
     })
     .catch(error => console.log(`couldn't update board data: ${error}`))
-  }, []);
+  }, [selectedBoard]);
 
 
   const addBoard = (newBoard) => {
@@ -112,10 +112,12 @@ function App() {
     }
 
     getBoardById(boardId)
-      .then((apiBoard) => {
-        const boardObj = convertBoardFromApi(apiBoard);
+      .then(({board, cards}) => {
+        const boardObj = convertBoardFromApi(board);
+        boardObj['cards'] = cards.map(convertCardFromApi);
         setSelectedBoard(boardObj);
         setIsBoardSelected(true);
+        console.log(boardObj)
       })
       .catch(error => console.log(`Could not select board: ${error}`));
   };
@@ -131,14 +133,18 @@ function App() {
 
     addNewCard(selectedBoard.id, apiCard)
     .then(response => {
-      // console.log(response)
-      setBoardData((boardData) => boardData.map(board => {
-        if (board.id === selectedBoard.id) {
-          console.log(board)
-          return {...board, cards: [...board.cards, convertCardFromApi(response.card)]};
-        } else return board;
-      }));
+      console.log(response);
+      setSelectedBoard(prevBoard => {
+        return {...prevBoard, cards: [...prevBoard.cards, convertCardFromApi(response.card)]}
+      })
+      // setBoardData((boardData) => boardData.map(board => {
+      //   if (board.id === selectedBoard.id) {
+      //     console.log(board)
+      //     return {...board, cards: [...board.cards, convertCardFromApi(response.card)]};
+      //   } else return board;
+      // }))
     })
+    .then()
     .catch(error => console.log(`Could not add card: ${error}`));
     selectBoard(selectedBoard.id);
     console.log(selectedBoard)
