@@ -1,8 +1,20 @@
 .cards {
-    display: flex;
-    padding: 2rem 5%;
-    vertical-align: text-top;
     columns: 3;
-    gap: 1.6rem;
-    justify-content: center; 
+    list-style: none;
 }
+
+.cards li {
+    background: #b5ebde;
+    margin-bottom: 15px;
+    border: 1px solid #c7c9e0;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cards li:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
