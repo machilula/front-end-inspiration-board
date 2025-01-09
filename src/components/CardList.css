@@ -4,7 +4,10 @@
 }
 
 .cards li {
-    background: #b5ebde;
+    /* background: #b5ebde; */
+    background-image: url("../assets/inspo.board.png");
+    background-size: contain;
+    background-repeat: no-repeat;
     margin-bottom: 15px;
     border: 1px solid #c7c9e0;
     border-radius: 10px;

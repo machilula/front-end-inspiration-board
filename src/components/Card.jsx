@@ -1,4 +1,6 @@
 import { useState } from "react";
+import './Card.css';
+// import notepad from '../assets/inspo.board.png';
 import propTypes from 'prop-types';
 
 export const Card = (props) => {
@@ -9,7 +11,8 @@ export const Card = (props) => {
   };
 
   return (
-    <li>
+    <li className="card-container"> 
+      {/* <img src={notepad}/> */}
       <h3>{props.message}</h3>
       <h3>{likeCount}</h3>
       <button onClick={onLikeClick}>💜</button>
