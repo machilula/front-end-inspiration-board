@@ -10,6 +10,6 @@ export const CardList = (props) => {
       return <Card key={index} message={card.message} likes={card.likes}/>
   });
   
-  return <ul>{allCards}</ul>
+  return <ul class="cards">{allCards}</ul>
 };
 
