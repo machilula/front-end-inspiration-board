@@ -1,4 +1,5 @@
 import propTypes from 'prop-types';
+import './Card.css'
 
 export const Card = (props) => {
   const onLikeClick = () => {
@@ -12,7 +13,6 @@ export const Card = (props) => {
 
   return (
     <li className="card-container"> 
-      {/* <img src={notepad}/> */}
       <h3>{props.message}</h3>
       <p>{props.likes}</p>
       <button onClick={onLikeClick}>💜</button>

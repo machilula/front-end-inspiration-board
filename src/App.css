@@ -1,8 +1,6 @@
 h1,
 h2,
-.create-btn,
-.board-btn,
-.card-btn {
+button {
   font-family: "Coiny", serif;
   font-weight: 400;
   font-style: normal;
