@@ -1,5 +1,6 @@
 import { CardList } from './CardList';
 import propTypes from 'prop-types';
+import './Board.css';
 
 export const Board = ({ board, onDeleteCard }) => {
   
