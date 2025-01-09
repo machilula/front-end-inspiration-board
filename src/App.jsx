@@ -4,7 +4,7 @@ import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
 import { NewCardForm } from "./components/NewCardForm";
-import { getAllBoards, addNewBoard, getBoardById, addNewCard } from './httpRequests/boardRequests';
+import { getAllBoards, addNewBoard, getBoardById, addNewCard, deleteCard, likeCard} from './httpRequests/boardRequests';
 import './App.css';
 
 const convertBoardFromApi = (apiBoard) => {
@@ -70,31 +70,49 @@ function App() {
 
 
   const addCard = (newCard) => {
-    const apiCard = {"message": newCard.message, "like_count": 0};
-    
+    const apiCard = { "message": newCard.message, "like_count": 0 };
+
     addNewCard(selectedBoard.id, apiCard)
-    .then(response => {
-      console.log(response);
-      setSelectedBoard(prevBoard => {
-        return {...prevBoard, cards: [...prevBoard.cards, convertCardFromApi(response.card)]}
-      });
-    })
-    .catch(error => console.log(`Could not add card: ${error}`));
+      .then(response => {
+        console.log(response);
+        setSelectedBoard(prevBoard => {
+          const updatedCards = prevBoard.cards ? [...prevBoard.cards, convertCardFromApi(response.card)] : [convertCardFromApi(response.card)];
+          return { ...prevBoard, cards: updatedCards || [] };
+        });
+      })
+      .catch(error => console.log(`Could not add card: ${error}`));
     selectBoard(selectedBoard.id);
-    console.log(selectedBoard)
+    console.log(selectedBoard);
   };
-  
-  
-  const deleteCard = (boardId, cardId) => {
-    setBoardData(boardData => boardData.map(board => {
-      if (board.id === boardId) {
-        board.cards.filter(card => {
-          return card.id !== cardId;
-        })
-      } else {
-        return;
-      }
-    }));
+
+  const delCard = (cardId) => {
+    console.log(cardId);
+    deleteCard(cardId)
+      .then(() => {
+        setSelectedBoard(prevBoard => {
+          const updatedCards = prevBoard.cards ? prevBoard.cards.filter(card => card.id !== cardId) : [];
+          return { ...prevBoard, cards: updatedCards || [] };
+        });
+      })
+      .catch(error => console.log(`Could not delete card: ${error}`));
+  };
+
+  const updateLikeCount = (cardId) => {
+    likeCard(cardId)
+      .then(response => {
+        console.log(response);
+        setSelectedBoard(apiBoard => {
+          const updatedCards = apiBoard.cards.map(card => {
+            if (card.id === cardId) {
+              return apiBoard
+            } else {
+              return card;
+            }
+          });
+          return { ...apiBoard, cards: updatedCards };
+        });
+      })
+      .catch(error => console.log(`Could not update like count: ${error}`));
   };
 
   const headerTitle = isBoardSelected ? `INSPIRATION FOR ${selectedBoard.title}`: 'CHOOSE OR CREATE BOARD!';
@@ -112,11 +130,11 @@ function App() {
           {isBoardSelected && <NewCardForm  onNewCard={addCard}/> }
         </section>
         <section className='cards-container'>
-          {isBoardSelected ? <Board board={selectedBoard} onDeleteCard={deleteCard}/> : ''}
+          {isBoardSelected ? <Board board={selectedBoard} onDeleteCard={delCard} onLikeCard={updateLikeCount}/> : ''}
         </section> 
       </main>
     </div>
   );
 }
 
-export default App
+export default App;
