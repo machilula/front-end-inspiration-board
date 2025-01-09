@@ -11,7 +11,8 @@ export const Card = (props) => {
   };
 
   return (
-    <li>
+    <li className="card-container"> 
+      {/* <img src={notepad}/> */}
       <h3>{props.message}</h3>
       <p>{props.likes}</p>
       <button onClick={onLikeClick}>💜</button>
