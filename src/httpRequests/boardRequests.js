@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const kbaseURL = "http://127.0.0.1:5000";
+const kbaseURL = "https://back-end-inspiration-board-wc5b.onrender.com";
 
 
 // when user submits a new board form, new board should be created
