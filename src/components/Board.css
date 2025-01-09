@@ -1,9 +1,6 @@
 .Board {
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
-    border: 50px;
-    padding: 50px;
 
-    border: 1px solid black;
+    padding: 50px;
 }

@@ -29,6 +29,7 @@
 .create-btn,
 .board-btn {
     background: linear-gradient(180deg, #4ad6ef, #d0ffbc);
+    text-align: center;
 }
 
 .hide-btn {
