@@ -11,7 +11,11 @@
 }
 
 .input-col input{
+    font-size: 1.25rem;
+    font-family: 'Barlow Condensed', sans-serif;
+
     width: 100%;
+    padding: .25rem;
 
     background-color: #c0e6ff;
     
@@ -20,8 +24,6 @@
 
     display: block;
     outline: none;
-    
-    font-size: 1.25rem;
 }
 
 .create-btn,

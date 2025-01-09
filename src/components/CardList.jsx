@@ -1,11 +1,8 @@
 import { Card } from './Card';
+import propTypes from 'prop-types';
 import './CardList.css'
 
 export const CardList = (props) => {
-
-  // const handleDeleteCard = (id) => {
-    
-  // };
 
   const allCards = props.cards.map((card, index) => {
       return <Card key={index} message={card.message} likes={card.likes}/>
@@ -14,3 +11,9 @@ export const CardList = (props) => {
   return <ul class="cards">{allCards}</ul>
 };
 
+CardList.propTypes = {
+  cards: propTypes.arrayOf(propTypes.shape({
+    message: propTypes.string.isRequired,
+    likes: propTypes.number.isRequired
+  })).isRequired,
+};

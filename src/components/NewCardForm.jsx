@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from 'react';
+import propTypes from 'prop-types';
 import './NewCardForm.css';
 
 const initialValue = {
@@ -24,34 +25,35 @@ export const NewCardForm = (props) => {
     event.preventDefault();
     // console.log(card)
     props.onNewCard(card);
-    setCard(initialValue)
+    setCard(initialValue);
   };
   
   if (showCardForm) {
     return (
-      <div>
+      <div className='NewCardForm'>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='message'>Message</label>
+          <div className='input-col'>
+            <label htmlFor='message'>message:</label>
             <input
               type='text'
               id='message'
               value={card.message}
-              onChange={handleCardChange}/>
+              onChange={handleCardChange}
+              required/>
           </div>
-          <div>
-            <p>preview: {card.message}</p>
-          </div>
-          <input type="submit" value='Create'/>
+          <input className='create-btn' type='submit' value='CREATE'/>
         </form>
-        <button className="card-btn" onClick={() => setShowCardForm(false)}>Hide New Card</button>
+        <button className='card-btn hide-btn' onClick={() => setShowCardForm(false)}>HIDE NEW CARD</button>
       </div>
-    )
+    );
   } else {
     return (
-      <button className="card-btn" onClick={handleShowCardForm}>NEW CARD</button>
-    )
+      <button className='card-btn' onClick={handleShowCardForm}>NEW CARD</button>
+    );
   }
 };
 
+NewCardForm.propTypes = {
+  onNewCard: propTypes.func.isRequired
+};
 

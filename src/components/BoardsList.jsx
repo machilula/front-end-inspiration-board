@@ -1,8 +1,9 @@
+import propTypes from 'prop-types';
 import './BoardsList.css';
 
 export const BoardsList = ({ boards, onSelectBoard }) => {
   const boardTitles = boards.map((board) => {
-    return <option key={board.id} id={board.id} value={board.id}>{board.title}</option>
+    return <option key={board.id} id={board.id} value={board.id}>{board.title}</option>;
   });
 
   return (
@@ -14,4 +15,9 @@ export const BoardsList = ({ boards, onSelectBoard }) => {
       </select>
     </div>
   );
+};
+
+BoardsList.propTypes = {
+  boards: propTypes.array,
+  onSelectBoard: propTypes.func.isRequired
 };

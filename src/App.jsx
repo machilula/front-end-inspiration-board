@@ -38,20 +38,15 @@ function App() {
       const boards = apiBoards.map(convertBoardFromApi);
       setBoardData(boards);
     })
-    .catch(error => console.log(`couldn't update board data: ${error}`))
+    .catch(error => console.log(`couldn't update board data: ${error}`));
   }, [selectedBoard]);
 
 
   const addBoard = (newBoard) => {
-    console.log(newBoard)
     const apiBoard = {"title": newBoard.title, "owner": newBoard.creator};
 
     addNewBoard(apiBoard)
-      // .then(response => console.log(response.board))
-      .then(response => {
-        console.log(response.board)
-        setBoardData(prevBoards => [convertBoardFromApi(response.board), ...prevBoards])
-      })
+      .then(response => setBoardData(prevBoards => [convertBoardFromApi(response.board), ...prevBoards]))
       .catch(error => console.log(`Couldn't add board: ${error}`));
   };
   
@@ -69,41 +64,27 @@ function App() {
         boardObj['cards'] = cards.map(convertCardFromApi);
         setSelectedBoard(boardObj);
         setIsBoardSelected(true);
-        console.log(boardObj)
       })
       .catch(error => console.log(`Could not select board: ${error}`));
   };
 
-  const headerTitle = isBoardSelected ? `INSPIRATION FOR ${selectedBoard.title}`: 'CHOOSE OR CREATE BOARD!';
-  const currentBoardTitle =  `${selectedBoard.title} by ${selectedBoard.creator}`; 
 
-  //  addCard does not render a new card. WIP
   const addCard = (newCard) => {
-    // console.log(newCard)
-    // console.log(selectedBoard)
-    const apiCard = {"message": newCard.message, "like_count": 0}
-
+    const apiCard = {"message": newCard.message, "like_count": 0};
+    
     addNewCard(selectedBoard.id, apiCard)
     .then(response => {
       console.log(response);
       setSelectedBoard(prevBoard => {
         return {...prevBoard, cards: [...prevBoard.cards, convertCardFromApi(response.card)]}
-      })
-      // setBoardData((boardData) => boardData.map(board => {
-      //   if (board.id === selectedBoard.id) {
-      //     console.log(board)
-      //     return {...board, cards: [...board.cards, convertCardFromApi(response.card)]};
-      //   } else return board;
-      // }))
+      });
     })
-    .then()
     .catch(error => console.log(`Could not add card: ${error}`));
     selectBoard(selectedBoard.id);
     console.log(selectedBoard)
   };
   
-
-//  deleteCard event handler WIP, does not work
+  
   const deleteCard = (boardId, cardId) => {
     setBoardData(boardData => boardData.map(board => {
       if (board.id === boardId) {
@@ -116,6 +97,8 @@ function App() {
     }));
   };
 
+  const headerTitle = isBoardSelected ? `INSPIRATION FOR ${selectedBoard.title}`: 'CHOOSE OR CREATE BOARD!';
+  
   return (
     <div className='App'>
       <header>
