@@ -7,54 +7,6 @@ import { NewCardForm } from "./components/NewCardForm";
 import { getAllBoards, addNewBoard, getBoardById, addNewCard } from './httpRequests/boardRequests';
 import './App.css';
 
-// const BOARDS = [
-//   {
-//     id: 1,
-//     title: 'Test A',
-//     creator: 'Lula',
-//     cards: [
-//       {
-//         id: 1,
-//         message: 'AAA',
-//         likes: 5
-//       },
-//       {
-//         id: 2,
-//         message: 'BBB',
-//         likes: 2
-//       },
-//       {
-//         id: 3,
-//         message: 'CCC', 
-//         likes: 6
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     title: 'Test B',
-//     creator: 'Lula',
-//     cards: [
-//       {
-//         id: 1,
-//         message: '111',
-//         likes: 4
-//       },
-//       {
-//         id: 2,
-//         message: '222',
-//         likes: 0
-//       }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     title: 'Test C',
-//     creator: 'Lula',
-//     cards: []
-//   }
-// ];
-
 const convertBoardFromApi = (apiBoard) => {
   const newBoard = {
     id: apiBoard.id,

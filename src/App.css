@@ -33,6 +33,10 @@ main {
   gap: 5em;
 }
 
+.left-panel {
+  width: 20%;
+}
+
 button,
 .create-btn {
   width: 100%;
