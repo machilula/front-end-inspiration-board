@@ -22,7 +22,7 @@ const convertCardFromApi = (apiCard) => {
   const newCard = {
     id: apiCard.id,
     message: apiCard.message,
-    likes: 0
+    likes: apiCard.like_count
   };
   return newCard
 };
@@ -101,15 +101,12 @@ function App() {
     likeCard(cardId)
       .then(response => {
         console.log(response);
-        setSelectedBoard(apiBoard => {
-          const updatedCards = apiBoard.cards.map(card => {
-            if (card.id === cardId) {
-              return apiBoard
-            } else {
-              return card;
-            }
-          });
-          return { ...apiBoard, cards: updatedCards };
+        const updatedCard = convertCardFromApi(response);
+        setSelectedBoard(prevBoard => {
+          const updatedCards = prevBoard.cards.map(card => 
+            card.id === cardId ? updatedCard : card
+          );
+          return { ...prevBoard, cards: updatedCards };
         });
       })
       .catch(error => console.log(`Could not update like count: ${error}`));
