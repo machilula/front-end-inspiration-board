@@ -4,7 +4,7 @@ import { BoardsList } from './components/BoardsList';
 import { NewBoardForm } from './components/NewBoardForm';
 import { Board } from './components/Board';
 import { NewCardForm } from "./components/NewCardForm";
-import { getAllBoards, addNewBoard, getBoardById } from './httpRequests/boardRequests';
+import { getAllBoards, addNewBoard, getBoardById, addNewCard } from './httpRequests/boardRequests';
 import './App.css';
 
 // const BOARDS = [
@@ -126,20 +126,22 @@ function App() {
   //  addCard does not render a new card. WIP
   const addCard = (newCard) => {
     // console.log(newCard)
-    console.log(selectedBoard)
+    // console.log(selectedBoard)
     const apiCard = {"message": newCard.message, "like_count": 0}
 
     addNewCard(selectedBoard.id, apiCard)
     .then(response => {
-      console.log(response)
+      // console.log(response)
       setBoardData((boardData) => boardData.map(board => {
         if (board.id === selectedBoard.id) {
+          console.log(board)
           return {...board, cards: [...board.cards, convertCardFromApi(response.card)]};
         } else return board;
       }));
     })
     .catch(error => console.log(`Could not add card: ${error}`));
     selectBoard(selectedBoard.id);
+    console.log(selectedBoard)
   };
   
 
