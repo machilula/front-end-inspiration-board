@@ -1,8 +1,11 @@
-# React + Vite
+# Inspiration Board ☁️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dreamy, cloud-themed front end application for collecting and organizing your inspirations!  
+Users can create multiple boards and add inspirational cards to each board.  
+The soothing UI mimics clouds, making the experience relaxing and playful—because inspiration is often found in the clouds.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Create Boards**: Organize your thoughts by creating separate inspiration boards.
+- **Add Cards**: Add individual cards to any board, each representing an idea, image, or source of creativity.
+- **Cloud-Inspired UI**: Soft, floating elements and gentle colors create a calming, dreamy atmosphere.
